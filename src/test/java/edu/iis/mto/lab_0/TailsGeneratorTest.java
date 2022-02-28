@@ -11,37 +11,40 @@ import org.junit.jupiter.api.Test;
 
 class TailsGeneratorTest {
 
-    private static final String HELLO = "Hello";
     private TailsGenerator tailsGenerator;
     private List<String> tails;
 
     @BeforeEach
     void setup() {
-
         tailsGenerator = new TailsGenerator();
-        tails = tailsGenerator.tails(HELLO);
     }
 
     @Test
     void tailsShouldReturnListOfStringsOfSizeEqualsToInputStringLengthPlusOne() {
+        String value = "Hello";
+        tails = tailsGenerator.tails(value);
 
-        assertThat(tails, hasSize(HELLO.length() + 1));
+        assertThat(tails, hasSize(value.length() + 1));
     }
 
     @Test
     void tailsShouldReturnFullStringAsFirstElement() {
-
-        assertThat(tails.get(0), equalTo(HELLO));
+        String value = "Foo";
+        tails = tailsGenerator.tails(value);
+        assertThat(tails.get(0), equalTo(value));
     }
 
     @Test
     void tailsShouldReturnStringMinusTwoFirstSignsAsThirdElement() {
-        assertThat(tails.get(2), equalTo(HELLO.substring(2)));
+        String value = "Bazzzzzzzz";
+        tails = tailsGenerator.tails(value);
+        assertThat(tails.get(2), equalTo(value.substring(2)));
     }
 
     @Test
     void tailsShouldReturnEmptyStringAsLastElement() {
-
+        String value = "Empty";
+        tails = tailsGenerator.tails(value);
         assertThat(tails.get(tails.size() - 1), equalTo(""));
     }
 
